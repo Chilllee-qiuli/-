@@ -28,7 +28,7 @@ public class Student {
 
     @OneToOne
     @JoinColumn(name="personId")
-    @JsonIgnore
+    @JsonIgnore//别的类
     private Person person;
 
     @Size(max = 20)
@@ -36,7 +36,5 @@ public class Student {
 
     @Size(max = 50)
     private String className;
-
-
 
 }

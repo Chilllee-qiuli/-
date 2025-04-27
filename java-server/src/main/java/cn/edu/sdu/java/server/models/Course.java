@@ -10,6 +10,7 @@ package cn.edu.sdu.java.server.models;
  * Course preCourse 前序课程 pre_course_id 关联前序课程的主键 course_id
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -37,5 +38,10 @@ public class Course  {
     private Course preCourse;
     @Size(max = 12)
     private String coursePath;
-
+    @Size(max = 20)
+    private String textBook;
+    @Size(max = 20)
+    private String pptDownloadPath;
+    @Size(max = 20)
+    private String referenceMaterial;
 }

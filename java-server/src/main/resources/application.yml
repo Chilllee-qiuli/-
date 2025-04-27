@@ -9,6 +9,9 @@ spring:
   application:
     name: java-server
   datasource:
+#    url: jdbc:mysql://202.194.14.120:3306/java_db?allowPublicKeyRetrieval=true&useSSL=false
+#    username: java_server
+#    password: JavaServer2025@
     url: jdbc:mysql://202.194.14.120:3306/java_2_34?allowPublicKeyRetrieval=true&useSSL=false
     username: java_2_34
     password: JavaP234@

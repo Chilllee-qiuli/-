@@ -44,7 +44,7 @@ public class StudentController {
         return studentService.getStudentList(dataRequest);
     }
 
-
+//旋度
     /**
      * studentDelete 删除学生信息Web服务 Student页面的列表里点击删除按钮则可以删除已经存在的学生信息， 前端会将该记录的id 回传到后端，方法从参数获取id，查出相关记录，调用delete方法删除
      * 这里注意删除顺序，应为user关联person,Student关联Person 所以要先删除Student,User，再删除Person
