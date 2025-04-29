@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"  prefWidth="800.0" fx:controller="com.teach.javafx.controller.TeacherController">
+    <center>
+        <TableView fx:id="dataTableView" >
+            <columns>
+                <TableColumn fx:id="numColumn" prefWidth="100.0" text="工号" />
+                <TableColumn fx:id="nameColumn" prefWidth="70.0" text="姓名" />
+                <TableColumn fx:id="deptColumn" prefWidth="75.0" text="院系" />
+                <TableColumn fx:id="titleColumn" prefWidth="75.0" text="职称" />
+                <TableColumn fx:id="degreeColumn" prefWidth="75.0" text="学位" />
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
