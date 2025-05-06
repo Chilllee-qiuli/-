@@ -38,6 +38,7 @@ public class StudentService {
     private final FeeRepository feeRepository;  //消费数据操作自动注入
     private final FamilyMemberRepository familyMemberRepository;
     private final SystemService systemService;
+    //private final HonorResitory
     public StudentService(PersonRepository personRepository, StudentRepository studentRepository, UserRepository userRepository, UserTypeRepository userTypeRepository, PasswordEncoder encoder,  FeeRepository feeRepository, FamilyMemberRepository familyMemberRepository, SystemService systemService) {
         this.personRepository = personRepository;
         this.studentRepository = studentRepository;
@@ -50,6 +51,7 @@ public class StudentService {
     }
 
     public Map<String,Object> getMapFromStudent(Student s) {
+        // 这里是建立一个映射map得到这个student的所有信息
         Map<String,Object> m = new HashMap<>();
         Person p;
         if(s == null)
@@ -60,6 +62,7 @@ public class StudentService {
         if(p == null)
             return m;
         m.put("personId", s.getPersonId());
+        m.put("graduateSchool",s.getGraduateSchool());
         m.put("num",p.getNum());
         m.put("name",p.getName());
         m.put("dept",p.getDept());
@@ -80,6 +83,7 @@ public class StudentService {
     // StudentController中的方法可以直接使用
 
     public List<Map<String,Object>> getStudentMapList(String numName) {
+        //得到一组学生的所有信息
         List<Map<String,Object>> dataList = new ArrayList<>();
         List<Student> sList = studentRepository.findStudentListByNumName(numName);  //数据库查询操作
         if (sList == null || sList.isEmpty())
@@ -91,6 +95,7 @@ public class StudentService {
     }
 
     public DataResponse getStudentList(DataRequest dataRequest) {
+        // 模糊查找
         String numName = dataRequest.getString("numName");
         List<Map<String,Object>> dataList = getStudentMapList(numName);
         return CommonMethod.getReturnData(dataList);  //按照测试框架规范会送Map的list
@@ -195,6 +200,7 @@ public class StudentService {
         personRepository.save(p);  // 修改保存人员信息
         s.setMajor(CommonMethod.getString(form, "major"));
         s.setClassName(CommonMethod.getString(form, "className"));
+        s.setGraduateSchool(CommonMethod.getString(form, "graduateSchool"));
         studentRepository.save(s);  //修改保存学生信息
         systemService.modifyLog(s,isNew);
         return CommonMethod.getReturnData(s.getPersonId());  // 将personId返回前端
@@ -334,9 +340,10 @@ public class StudentService {
     public ResponseEntity<StreamingResponseBody> getStudentListExcl( DataRequest dataRequest) {
         String numName = dataRequest.getString("numName");
         List<Map<String,Object>> list = getStudentMapList(numName);
-        Integer[] widths = {8, 20, 10, 15, 15, 15, 25, 10, 15, 30, 20, 30};
+        Integer[] widths = {8, 20, 10, 15, 15, 15, 25, 10, 15, 30, 20, 30, 30};
         int i, j, k;
-        String[] titles = {"序号", "学号", "姓名", "学院", "专业", "班级", "证件号码", "性别", "出生日期", "邮箱", "电话", "地址"};
+        // 20250506: 加入毕业院校选项
+        String[] titles = {"序号", "学号", "姓名", "学院", "专业", "班级", "证件号码", "性别", "出生日期", "邮箱", "电话", "地址", "毕业院校"};
         String outPutSheetName = "student.xlsx";
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFCellStyle styleTitle = CommonMethod.createCellStyle(wb, 20);
@@ -376,6 +383,7 @@ public class StudentService {
                 cell[9].setCellValue(CommonMethod.getString(m, "email"));
                 cell[10].setCellValue(CommonMethod.getString(m, "phone"));
                 cell[11].setCellValue(CommonMethod.getString(m, "address"));
+                cell[11].setCellValue(CommonMethod.getString(m, "graduateSchool"));
             }
         }
         try {

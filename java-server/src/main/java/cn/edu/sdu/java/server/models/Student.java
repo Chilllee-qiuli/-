@@ -37,6 +37,7 @@ public class Student {
     @Size(max = 50)
     private String className;
 
-
+    @Size(max = 50)
+    private String graduateSchool;
 
 }
