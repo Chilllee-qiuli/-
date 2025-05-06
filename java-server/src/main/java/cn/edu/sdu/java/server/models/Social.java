@@ -19,22 +19,46 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(	name = "student",
+@Table(	name = "social",
         uniqueConstraints = {
         })
-public class Student {
+public class Social {
     @Id
-    private Integer personId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer socialId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="personId")
-    @JsonIgnore//别的类
-    private Person person;
+    @JsonIgnore
+    private Student student;
 
     @Size(max = 20)
-    private String major;
+    private String project;
 
-    @Size(max = 50)
-    private String className;
+    @ManyToOne
+    @JoinColumn(name="teacherId")
+    @JsonIgnore
+    private Teacher teacher;
+
+    @Size(max = 20)
+    private String teamName;
+
+    @Size(max = 20)
+    private String location;
+
+    @Size(max = 20)
+    private String startTime;
+
+    @Size(max = 20)
+    private String endTime;
+
+    @Size(max = 20)
+    private String description;
+
+    @Size(max = 20)
+    private String certification;
+
+    @Size(max = 20)
+    private String fee;
 
 }

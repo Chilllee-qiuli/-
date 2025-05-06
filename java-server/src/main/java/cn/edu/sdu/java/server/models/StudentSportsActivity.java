@@ -1,41 +1,32 @@
 package cn.edu.sdu.java.server.models;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-
-import lombok.Getter;
-import lombok.Setter;
-
 import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(	name = "teacher",
+@Table(	name = "student_sports_activity",
         uniqueConstraints = {
         })
-public class Teacher {
+public class StudentSportsActivity {
     @Id
-    private Integer personId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer studentSportsActivityId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="personId")
     @JsonIgnore
-    private Person person;
+    private Student student;
 
     @Size(max = 20)
-    private String degree;
+    private String sportsClubName;
 
     @Size(max = 50)
-    private String teachingClass;
+    private String sportsCompetitionName;
 
     @Size(max = 50)
-    private String title;
+    private String sportsHonor;
 
-    @Size(max = 50)
-    private String age;
-
-    private Integer wage;
 }

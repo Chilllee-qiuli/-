@@ -1,5 +1,6 @@
 package cn.edu.sdu.java.server.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 /*
  * Score 成绩表实体类  保存成绩的的基本信息信息，
@@ -24,6 +25,7 @@ public class Score {
 
     @ManyToOne
     @JoinColumn(name = "personId")
+    @JsonIgnore
     private Student student;
 
     @ManyToOne
