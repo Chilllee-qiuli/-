@@ -17,6 +17,7 @@ public class Student {
     private String introduce;
     private String major;
     private String className;
+    private String graduateSchool;
     public Student(){
 
     }
@@ -130,12 +131,16 @@ public class Student {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() { return address; }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getGraduateSchool() { return graduateSchool; }
+
+    public void setGraduateSchool(String graduateSchool) {
+        this.graduateSchool = graduateSchool;
     }
 
     public String getIntroduce() {

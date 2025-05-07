@@ -65,6 +65,8 @@ public class StudentController extends ToolController {
     @FXML
     private TableColumn<Map, String> addressColumn;//学生信息表 地址列
     @FXML
+    private TableColumn<Map, String> graduateSchool;//学生信息表 毕业院校列
+    @FXML
     private Button photoButton;  //照片显示和上传按钮
 
     @FXML
@@ -89,6 +91,8 @@ public class StudentController extends ToolController {
     private TextField phoneField;   //学生信息  电话输入域
     @FXML
     private TextField addressField;  //学生信息  地址输入域
+    @FXML
+    private TextField graduateSchoolField; // 学生信息  毕业院校输入域
 
     @FXML
     private TextField numNameTextField;  //查询 姓名学号输入域
@@ -139,6 +143,7 @@ public class StudentController extends ToolController {
         emailColumn.setCellValueFactory(new MapValueFactory<>("email"));
         phoneColumn.setCellValueFactory(new MapValueFactory<>("phone"));
         addressColumn.setCellValueFactory(new MapValueFactory<>("address"));
+        graduateSchool.setCellValueFactory(new MapValueFactory<>("graduateSchool"));
         TableView.TableViewSelectionModel<Map> tsm = dataTableView.getSelectionModel();
         ObservableList<Integer> list = tsm.getSelectedIndices();
         list.addListener(this::onTableRowSelect);
@@ -165,6 +170,7 @@ public class StudentController extends ToolController {
         emailField.setText("");
         phoneField.setText("");
         addressField.setText("");
+        graduateSchoolField.setText("");
     }
 
     protected void changeStudentInfo() {
@@ -193,6 +199,7 @@ public class StudentController extends ToolController {
         emailField.setText(CommonMethod.getString(form, "email"));
         phoneField.setText(CommonMethod.getString(form, "phone"));
         addressField.setText(CommonMethod.getString(form, "address"));
+        graduateSchoolField.setText(CommonMethod.getString(form, "graduateSchool"));
         displayPhoto();
     }
 
@@ -278,6 +285,7 @@ public class StudentController extends ToolController {
         form.put("email", emailField.getText());
         form.put("phone", phoneField.getText());
         form.put("address", addressField.getText());
+        form.put("graduateSchool", graduateSchoolField.getText());
         DataRequest req = new DataRequest();
         req.add("personId", personId);
         req.add("form", form);
@@ -463,5 +471,6 @@ public class StudentController extends ToolController {
             MessageDialog.showDialog(res.getMsg());
         }
     }
+
 
 }
