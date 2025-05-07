@@ -22,11 +22,12 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     Optional<Student> findByPersonNum(String num);
     List<Student> findByPersonName(String name);
 
-    @Query(value = "from Student where ?1='' or person.num like %?1% or person.name like %?1% ")
+    @Query(value = "from Student where ?1='' or person.num like %?1% or person.name like %?1% or graduateSchool like %?1%")
     List<Student> findStudentListByNumName(String numName);
 
 
     @Query(value = "from Student where ?1='' or person.num like %?1% or person.name like %?1% ",
             countQuery = "SELECT count(personId) from Student where ?1='' or person.num like %?1% or person.name like %?1% ")
     Page<Student> findStudentPageByNumName(String numName,  Pageable pageable);
+
 }
